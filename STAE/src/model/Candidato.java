@@ -1,31 +1,41 @@
 
 package model;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author momed003
  */
 public class Candidato {
-    private int id;
-    private int codigoMunicipio;
-    private String nome;
+       private String nome;
     private String bi;
     private String historico;
-        
-   
-    Municipio m=new Municipio();
+    private String CodigoMunicipio;
+    private String municipio;
+    private ArrayList<Voto> votos;
+    
     public Candidato(){
-    
-}
-
-    
-    public int getCodigoMunicipio() {
-        return codigoMunicipio;
+        
     }
 
-    public void setCodigoMunicipio(int codigoMunicipio) {
-        this.codigoMunicipio = m.getId();
+    public String getMunicipio() {
+        return municipio;
     }
+
+    public void setMunicipio(String municipio) {
+        this.municipio = municipio;
+    }
+    
+
+    public Candidato(String nome, String bi, String historico, String municipio_id) {
+        this.nome = nome;
+        this.bi = bi;
+        this.historico = historico;
+        this.CodigoMunicipio = municipio_id;
+    }
+    
+    
     public String getNome() {
         return nome;
     }
@@ -42,29 +52,27 @@ public class Candidato {
         this.bi = bi;
     }
 
-    public String getMunicipio() {
-        return m.getProvincia();
-    }
-
-
     public String getHistorico() {
         return historico;
     }
 
     public void setHistorico(String historico) {
         this.historico = historico;
-    } 
-   
-  
-    
-
-    public int getId() {
-        return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public String getCodigoMunicipio() {
+        return CodigoMunicipio;
     }
-    
-    
+
+    public void setCodigoMunicipio(String CodigoMunicipio) {
+        this.CodigoMunicipio = CodigoMunicipio;
+    }
+
+    public ArrayList<Voto> getVotos() {
+        return votos;
+    }
+
+    public void setVotos(ArrayList<Voto> votos) {
+        this.votos = votos;
+    }
 }

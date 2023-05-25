@@ -37,7 +37,7 @@ public class CandidatoController {
             pstm.setString(1, objC.getNome());
             pstm.setString(2, objC.getBi());
             pstm.setString(3, objC.getHistorico());
-            pstm.setInt(4, objC.getCodigoMunicipio());
+            pstm.setString(4, objC.getMunicipio());
             
             pstm.execute();
             pstm.close();
@@ -62,7 +62,7 @@ public class CandidatoController {
                     obj.setNome(rs.getString("nome"));
                     obj.setBi(rs.getString("bi"));
                     obj.setHistorico(rs.getString("historico"));
-                    obj.setCodigoMunicipio(rs.getInt("codigo"));
+                   // obj.setCodigoMunicipio(rs.getInt("codigo"));
                      lista.add(obj);
                  }
                  return lista;
@@ -100,4 +100,21 @@ public class CandidatoController {
         }
            return null;
     }
+    
+    /**
+     * Municipio municipio = (Municipio) muncipiosSelected.getSelectedItem();
+        
+        String nome = candidatoTxt.getText();
+        String bi = biTxt.getText();
+        String historico = txtHistorico.getText();
+
+        Candidato candidato = new Candidato();
+        candidato.setMunicipio_id(municipio.getId());
+        candidato.setNome(nome);
+        candidato.setBi(bi);
+        candidato.setHistorico(historico);
+
+        CandidatoController candidatoController = new CandidatoController();
+        candidatoController.save(candidato);
+     */
 }

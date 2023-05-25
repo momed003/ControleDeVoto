@@ -1,4 +1,3 @@
-
 package view;
 
 import controller.CandidatoController;
@@ -16,8 +15,8 @@ public class CandidatoView extends javax.swing.JFrame {
 
     public CandidatoView() {
         initComponents();
-        CandidatoController canditatoc=new CandidatoController();
-        for (Municipio mu:canditatoc.listarMunicipios()) {
+        CandidatoController canditatoc = new CandidatoController();
+        for (Municipio mu : canditatoc.listarMunicipios()) {
             jcMunicipio.addItem(mu);
         }
     }
@@ -187,7 +186,7 @@ public class CandidatoView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
-      Cadrastrar();
+        Cadrastrar();
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     private void jcMunicipioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcMunicipioActionPerformed
@@ -250,48 +249,45 @@ public class CandidatoView extends javax.swing.JFrame {
     private javax.swing.JTextField txtDescricao;
     private javax.swing.JTextField txtNome;
     // End of variables declaration//GEN-END:variables
-public void Cadrastrar(){
-     String municipio=jcMunicipio.getSelectedItem().toString();
-       String nome=txtNome.getText();
-       String bi=txtBi.getText();
-       String historico=txtDescricao.getText();
-       
-       //pegando os valores do viw para o model
-       
-       Candidato obj=new Candidato();
-       //obj.setMunicipio(municipio);
-       obj.setBi(bi);
-       obj.setNome(nome);
-       obj.setHistorico(historico);
-       obj.setCodigoMunicipio(Integer.parseInt(municipio));
-        CandidatoController cc=new CandidatoController();
+public void Cadrastrar() {
+        Municipio municipio1 =(Municipio) jcMunicipio.getSelectedItem();
+        String nome = txtNome.getText();
+        String bi = txtBi.getText();
+        String historico = txtDescricao.getText();
+        
+        //pegando os valores do viw para o model
+        Candidato obj = new Candidato();
+        obj.setBi(bi);
+        obj.setNome(nome);
+        obj.setHistorico(historico);
+        obj.setMunicipio(municipio1.getProvincia());
+        CandidatoController cc = new CandidatoController();
         cc.salvar(obj);
-        
-        DefaultTableModel tabela1= (DefaultTableModel)jTablecadastro.getModel() ;//criando a tabela
-         Object [] dados={jcMunicipio.getSelectedItem().toString(),txtNome.getText(),txtBi.getText(),txtDescricao.getText()};
-         
-         tabela1.addRow(dados);
-}
 
-    public void pesquisar(){
-    try {
-       CandidatoController ob=new CandidatoController();
-       DefaultTableModel tabela1= (DefaultTableModel)jTablecadastro.getModel() ;
-       tabela1.setRowCount(0);
-       
-        ArrayList<Candidato> p=ob.pesquisarCandidato();
-        
-        for (int i=0 ; i<p.size();i++){
-            p.get(i).getId();
-            p.get(i).getNome();
-            p.get(i).getBi();
-            p.get(i).getHistorico();
-            
+        DefaultTableModel tabela1 = (DefaultTableModel) jTablecadastro.getModel();//criando a tabela
+        Object[] dados = {jcMunicipio.getSelectedItem().toString(), txtNome.getText(), txtBi.getText(), txtDescricao.getText()};
+        tabela1.addRow(dados);
+    }
+
+    public void pesquisar() {
+        try {
+            CandidatoController ob = new CandidatoController();
+            DefaultTableModel tabela1 = (DefaultTableModel) jTablecadastro.getModel();
+            tabela1.setRowCount(0);
+
+            ArrayList<Candidato> p = ob.pesquisarCandidato();
+
+            for (int i = 0; i < p.size(); i++) {
+                // p.get(i).getId();
+                p.get(i).getNome();
+                p.get(i).getBi();
+                p.get(i).getHistorico();
+
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "pesquisar.view: " + e, "Stae", 0);
         }
-       
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(null, "pesquisar.view: "+e, "Stae", 0);
     }
-}
 
-    }
+}
