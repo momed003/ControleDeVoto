@@ -49,25 +49,25 @@ public class CandidatoController {
    
     public ArrayList<Candidato> pesquisarCandidato(){
         String sql="SELECT * FROM candidato";
-        
         try {
-            con=new ConexaoJDBC().getConnection();
-           pstm=(PreparedStatement) con.prepareStatement(sql);//prepara conexao
-           rs=pstm.executeQuery();//traz as inf da bd
-           
-           while (rs.next()){//se tiver mais de uma linha na bd continua aqui
-               Candidato obj=new Candidato();
-               obj.setId(rs.getInt("id"));
-               obj.setNome(rs.getString("nome"));
-               obj.setBi(rs.getString("bi"));
-               obj.setHistorico(rs.getString("historico"));
-               obj.setCodigoMunicipio(rs.getInt("codigo"));
-               lista.add(obj);
-           }
-        } catch (SQLException | ClassNotFoundException e) {
-         JOptionPane.showMessageDialog(null, "candidato Controller: "+e, "stae", 0);
-        }
+                con=new ConexaoJDBC().getConnection();
+                pstm=(PreparedStatement) con.prepareStatement(sql);//prepara conexao
+                rs=pstm.executeQuery();//traz as inf da bd
+                
+                 while (rs.next()){
+                  Candidato obj=new Candidato();
+                    obj.setNome(rs.getString("nome"));
+                    obj.setBi(rs.getString("bi"));
+                    obj.setHistorico(rs.getString("historico"));
+                    obj.setCodigoMunicipio(rs.getInt("codigo"));
+                     lista.add(obj);
+                 }
+                
+                
+        } catch (ClassNotFoundException | SQLException ex) {
+          JOptionPane.showMessageDialog(null, "candidato Controller: "+ex, "stae", 0); }
+
         return lista;
-    }
+     }
 
 }
