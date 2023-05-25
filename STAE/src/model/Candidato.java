@@ -6,10 +6,26 @@ package model;
  * @author momed003
  */
 public class Candidato {
+    
+    private int codigoMunicipio,id;
     private String nome;
     private String bi;
-    private Municipio municipio;
+    private String municipio, historico;
 
+   
+    Municipio m=new Municipio();
+    public Candidato(){
+    
+}
+
+    
+    public int getCodigoMunicipio() {
+        return codigoMunicipio;
+    }
+
+    public void setCodigoMunicipio(int codigoMunicipio) {
+        this.codigoMunicipio = codigoMunicipio;
+    }
     public String getNome() {
         return nome;
     }
@@ -26,20 +42,38 @@ public class Candidato {
         this.bi = bi;
     }
 
-    public Municipio getMunicipio() {
-        return municipio;
+    public String getMunicipio() {
+        return m.getProvincia();
     }
 
-    public void setMunicipio(Municipio municipio) {
+    public void setMunicipio(String municipio) {
         this.municipio = municipio;
     }
-    
+    public String getHistorico() {
+        return historico;
+    }
+
+    public void setHistorico(String historico) {
+        this.historico = historico;
+    } 
    
     
-    public Candidato(String nome, String bi,Municipio m){
+   /**
+    *  public Candidato(String nome, String bi,Municipio m){
         this.nome=nome;
         this.bi=bi;
-        municipio=m;
+        municipio=municipio;
     }
+    * @return 
+    */
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
     
 }
