@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.Candidato;
+import model.Municipio;
 
 /**
  *
@@ -15,6 +16,10 @@ public class CandidatoView extends javax.swing.JFrame {
 
     public CandidatoView() {
         initComponents();
+        CandidatoController canditatoc=new CandidatoController();
+        for (Municipio mu:canditatoc.listarMunicipios()) {
+            jcMunicipio.addItem(mu);
+        }
     }
 
     /**
@@ -51,7 +56,7 @@ public class CandidatoView extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel1.setText("Municipio");
 
-        jcMunicipio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3" }));
+        jcMunicipio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--escolha---" }));
         jcMunicipio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jcMunicipioActionPerformed(evt);
@@ -101,8 +106,6 @@ public class CandidatoView extends javax.swing.JFrame {
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel4.setText("Descrição");
 
-        btnPesquisar.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
-        btnPesquisar.setForeground(new java.awt.Color(102, 102, 102));
         btnPesquisar.setText("pesquisar");
         btnPesquisar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -114,6 +117,9 @@ public class CandidatoView extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 573, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(54, 54, 54)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -130,14 +136,11 @@ public class CandidatoView extends javax.swing.JFrame {
                     .addComponent(txtDescricao))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 573, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnPesquisar)
-                .addGap(96, 96, 96)
+                .addGap(18, 18, 18)
                 .addComponent(btnCadastrar)
-                .addGap(108, 108, 108))
+                .addGap(213, 213, 213))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -158,11 +161,11 @@ public class CandidatoView extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
+                .addGap(30, 30, 30)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCadastrar)
                     .addComponent(btnPesquisar))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -188,11 +191,12 @@ public class CandidatoView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     private void jcMunicipioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcMunicipioActionPerformed
-        // TODO add your handling code here:
+//       CandidatoController cc=new CandidatoController();
+//       cc.listarMunicipios();
     }//GEN-LAST:event_jcMunicipioActionPerformed
 
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
-       pesquisar();
+        pesquisar();
     }//GEN-LAST:event_btnPesquisarActionPerformed
 
     /**
@@ -241,7 +245,7 @@ public class CandidatoView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTablecadastro;
-    private javax.swing.JComboBox<String> jcMunicipio;
+    private javax.swing.JComboBox<Object> jcMunicipio;
     private javax.swing.JTextField txtBi;
     private javax.swing.JTextField txtDescricao;
     private javax.swing.JTextField txtNome;
@@ -253,22 +257,23 @@ public void Cadrastrar(){
        String historico=txtDescricao.getText();
        
        //pegando os valores do viw para o model
+       
        Candidato obj=new Candidato();
-       obj.setMunicipio(municipio);
+       //obj.setMunicipio(municipio);
        obj.setBi(bi);
        obj.setNome(nome);
        obj.setHistorico(historico);
-       
+       obj.setCodigoMunicipio(Integer.parseInt(municipio));
         CandidatoController cc=new CandidatoController();
         cc.salvar(obj);
         
-       //  DefaultTableModel tabela1= (DefaultTableModel)jTablecadastro.getModel() ;//criando a tabela
-        // Object [] dados={jcMunicipio.getSelectedItem().toString(),txtNome.getText(),txtBi.getText(),txtDescricao.getText()};
+        DefaultTableModel tabela1= (DefaultTableModel)jTablecadastro.getModel() ;//criando a tabela
+         Object [] dados={jcMunicipio.getSelectedItem().toString(),txtNome.getText(),txtBi.getText(),txtDescricao.getText()};
          
-         //tabela1.addRow(dados);
+         tabela1.addRow(dados);
 }
 
-public void pesquisar(){
+    public void pesquisar(){
     try {
        CandidatoController ob=new CandidatoController();
        DefaultTableModel tabela1= (DefaultTableModel)jTablecadastro.getModel() ;
@@ -289,4 +294,4 @@ public void pesquisar(){
     }
 }
 
-}
+    }

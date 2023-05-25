@@ -9,15 +9,14 @@ package model;
  * @author momed003
  */
 public class Municipio {
+    private int id;
     private String descricao;
     private String Provincia;
     private int qtdRecenssiados;
 
     @Override
     public String toString() {
-        return "Municipio{" + "descricao=" + descricao
-                + ", Provincia=" + Provincia 
-                + ", qtdRecenssiados=" + qtdRecenssiados + '}';
+        return getProvincia();
     }
     
     public Municipio(String descricao,String provincia, int qtd){
@@ -49,6 +48,14 @@ public class Municipio {
 
     public void setQtdRecenssiados(int qtdRecenssiados) {
         this.qtdRecenssiados = qtdRecenssiados;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
     
     

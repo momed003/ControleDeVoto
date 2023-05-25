@@ -6,12 +6,12 @@ package model;
  * @author momed003
  */
 public class Candidato {
-    
-    private int codigoMunicipio,id;
+    private int id;
+    private int codigoMunicipio;
     private String nome;
     private String bi;
-    private String municipio, historico;
-
+    private String historico;
+        
    
     Municipio m=new Municipio();
     public Candidato(){
@@ -24,7 +24,7 @@ public class Candidato {
     }
 
     public void setCodigoMunicipio(int codigoMunicipio) {
-        this.codigoMunicipio = codigoMunicipio;
+        this.codigoMunicipio = m.getId();
     }
     public String getNome() {
         return nome;
@@ -46,9 +46,7 @@ public class Candidato {
         return m.getProvincia();
     }
 
-    public void setMunicipio(String municipio) {
-        this.municipio = municipio;
-    }
+
     public String getHistorico() {
         return historico;
     }
@@ -57,15 +55,8 @@ public class Candidato {
         this.historico = historico;
     } 
    
+  
     
-   /**
-    *  public Candidato(String nome, String bi,Municipio m){
-        this.nome=nome;
-        this.bi=bi;
-        municipio=municipio;
-    }
-    * @return 
-    */
 
     public int getId() {
         return id;

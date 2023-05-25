@@ -12,6 +12,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import jdbc.ConexaoJDBC;
 import model.Candidato;
+import model.Municipio;
 
 /**
  *
@@ -22,7 +23,7 @@ public class CandidatoController {
     Connection con;
     PreparedStatement pstm;
     ResultSet rs;
-    ArrayList<Candidato>lista;
+
   
     
     public void salvar(Candidato objC){
@@ -48,8 +49,10 @@ public class CandidatoController {
     }
    
     public ArrayList<Candidato> pesquisarCandidato(){
+           
         String sql="SELECT * FROM candidato";
         try {
+             ArrayList<Candidato>lista=new ArrayList<>();
                 con=new ConexaoJDBC().getConnection();
                 pstm=(PreparedStatement) con.prepareStatement(sql);//prepara conexao
                 rs=pstm.executeQuery();//traz as inf da bd
@@ -62,12 +65,39 @@ public class CandidatoController {
                     obj.setCodigoMunicipio(rs.getInt("codigo"));
                      lista.add(obj);
                  }
+                 return lista;
                 
                 
         } catch (ClassNotFoundException | SQLException ex) {
           JOptionPane.showMessageDialog(null, "candidato Controller: "+ex, "stae", 0); }
 
-        return lista;
+        return null;
      }
+ 
+    public ArrayList<Municipio> listarMunicipios() {
+          String sql = "SELECT * FROM municipio";
+        try {
+            
+            ArrayList<Municipio> listaMunicipio = new ArrayList();
 
+            con=new ConexaoJDBC().getConnection();
+           pstm=(PreparedStatement) con.prepareStatement(sql);
+           rs = pstm.executeQuery();
+
+            while (rs.next()) {
+                Municipio obj = new Municipio();
+                obj.setId(rs.getInt("id"));
+                obj.setProvincia(rs.getString("provincia"));
+                obj.setDescricao(rs.getString("descricao"));
+                listaMunicipio.add(obj);
+            }
+
+            return listaMunicipio;
+
+        } catch (SQLException | ClassNotFoundException e) {
+            JOptionPane.showMessageDialog(null, "Listar municipi:" + e);
+
+        }
+           return null;
+    }
 }
